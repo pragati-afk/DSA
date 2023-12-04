@@ -1,0 +1,166 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: ChatScreen(),
+    );
+  }
+}
+
+class ChatScreen extends StatefulWidget {
+  @override
+  _ChatScreenState createState() => _ChatScreenState();
+}
+
+class _ChatScreenState extends State<ChatScreen> {
+
+  final List<ChatMessage> _messages = [];
+  final TextEditingController _textController = TextEditingController();
+
+  void _handleSubmittedMessage(String text) {
+    _textController.clear();
+
+    ChatMessage message = ChatMessage(
+      text: text,
+    );
+
+    setState(() {
+      _messages.insert(0, message);
+    });
+  }
+
+  Widget _buildTextComposer() {
+    return Container(
+      color: Colors.grey[300],
+     // margin: const EdgeInsets.symmetric(horizontal: 10.0),
+      child: Row(
+        children: <Widget>[
+          Flexible(
+            child: TextField(
+              controller: _textController,
+              onSubmitted: _handleSubmittedMessage,
+              decoration: InputDecoration.collapsed(hintText: '   Send a message'),
+            ),
+          ),
+          IconButton(
+            icon: Icon(Icons.send_outlined),
+            onPressed: () => _handleSubmittedMessage(_textController.text),
+    
+          ),
+        ],
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black87,
+
+      appBar: AppBar(
+        backgroundColor: Colors.pinkAccent[200],
+        title: Text('                   A.I Chat App',style:
+          TextStyle(
+            fontFamily: 'Roboto_Slab',
+          ),),
+      ),
+      
+    
+
+      body: Column(
+
+
+        children: <Widget>[
+
+          Flexible(
+
+            child: ListView.builder(
+
+              padding: EdgeInsets.all(8.0),
+              reverse: true,
+              itemBuilder: (_, int index) => _messages[index], itemCount: _messages.length,
+            ),
+          ),
+          Divider(height: 1.0),
+          _buildTextComposer(),
+        ],
+
+      ),
+    );
+  }
+}
+
+class ChatMessage extends StatelessWidget {
+  final String text;
+
+  ChatMessage({required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 10.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Container(
+            decoration: BoxDecoration(
+              
+              image: DecorationImage(image: NetworkImage("https://unsplash.com/photos/yellow-and-black-robot-toy-mou0S7ViElQ"),
+              )
+    ),
+            margin: const EdgeInsets.only(right: 16.0),
+            child: CircleAvatar(
+              child: Text('User'),
+              foregroundColor: Colors.yellow,
+              backgroundImage:NetworkImage('https://unsplash.com/photos/yellow-and-black-robot-toy-mou0S7ViElQ'),
+              backgroundColor: Colors.blue,
+
+            ),
+          ),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text('User', style: Theme.of(context).textTheme.subtitle1),
+                Container(
+
+                  height: 45,
+                  width: 1000,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(15.0),
+                      topLeft: Radius.circular(10.0),
+                      bottomRight: Radius.circular(15.0),
+                    ),
+                    gradient: LinearGradient(
+                      begin: Alignment.bottomLeft,
+                      end: Alignment.topRight,
+                      colors: [Colors.pinkAccent,Colors.blueAccent],
+                  ),
+                  ),
+                  margin: const EdgeInsets.only(top: 5.0),
+
+                  child: Text(" "+text, style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontFamily: 'Roboto_Slab',
+                  ),
+                  ),
+
+
+                ),
+              ],
+            ),
+          ),
+          ],
+
+      ),
+    );
+  }
+}

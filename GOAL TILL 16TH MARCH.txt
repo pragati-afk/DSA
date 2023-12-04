@@ -1,0 +1,31 @@
+GOAL TILL 16TH MARCH
+
+1.unity
+
+2.C++
+>recursion
+>arrays
+>searching
+>sorting
+>matrix
+>hashatg
+>strings
+>linked lists
+>stack
+>queue
+>deque
+>tree
+>binary search tree
+>heap
+>graph
+>greedy
+>backtracking
+>dynamic programming
+>trie
+>segment tree
+>disjoint set
+>projects
+
+3. C#
+
+(reqd for scripting)
