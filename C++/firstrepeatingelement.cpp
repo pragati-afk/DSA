@@ -7,7 +7,7 @@ int main(){
     for(int i=0 ;i<n;i++){
         cin>>array[i];
     }
-    const int N= 1000000;
+    const int N= 1e6+2;
     int Idx[N];
    for(int i=0;i<N;i++){
     Idx[i]=-1;
