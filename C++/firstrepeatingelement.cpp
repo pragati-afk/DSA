@@ -7,14 +7,28 @@ int main(){
     for(int i=0 ;i<n;i++){
         cin>>array[i];
     }
-    for(int i=0;i<n;i++){
-        for(int j=(i+1);j<n;j++){
-            if(array[i]==array[j]){
-                cout<<i<<" ";
-
-                break;
-            }
-        }
-       
+    const int N= 1000000;
+    int Idx[N];
+   for(int i=0;i<N;i++){
+    Idx[i]=-1;
+   }
+   int k=0,repeat1=-1,repeat2=-1,minrepeat=-1;
+   for(int i=0;i<n;i++)
+   {
+    if(Idx[k]!=-1){
+      repeat1=Idx[k];
+      if(repeat1>repeat2){
+        minrepeat=repeat1;
+      }
+      else{
+        minrepeat=repeat2;
+      }
+      repeat2=repeat1;
     }
-}
+     k=array[i];
+     Idx[k]=i;
+     
+   }
+   cout<<minrepeat;
+
+    }
