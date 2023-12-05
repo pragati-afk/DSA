@@ -1,8 +1,10 @@
 #include <iostream>
 using namespace std;
 int main(){
-    int aptr,a=10;
-    *aptr=&a;
-    *aptr++;
-    cout<<*aptr;
+    int a=10;
+    
+   int *aptr=&a;
+   cout<<aptr<<endl;
+    aptr++;
+    cout<<aptr;
 }
